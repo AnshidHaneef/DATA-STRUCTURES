@@ -147,7 +147,26 @@ deleteNode(root,data){
     }
         return root;
 }
+}
 
+function isBst(root) {
+    function inOrderTrav(node,value) {
+        if (!node) {
+            return;
+        }
+        inOrderTrav(node.left,value)
+        value.push(node.val)
+        inOrderTrav(node.right,value)
+    }
+    const value = []
+    inOrderTrav(root,value);
+
+    for (let i = 1; i < value.length; i++) {
+        if (value[i] <= value[i - 1]) {
+          return false;
+        }
+      }
+      return true;
 }
   
 
@@ -175,3 +194,5 @@ console.log('Smallest Node =',bst.min(bst.root));
 bst.delete(60)
 
 bst.levelOrder()
+
+console.log(isBst(bst.root));
